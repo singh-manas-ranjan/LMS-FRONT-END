@@ -17,4 +17,15 @@ async function fetchAllUsers(
   }
 }
 
-export { fetchAllUsers };
+const getUserByEmail = async (email: string, accountType: string) => {
+  try {
+    return await axios
+      .get(`http://localhost:3131/api/v1/${accountType}/${email}`)
+      .then((res) => res.data.body);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export { fetchAllUsers, getUserByEmail };
