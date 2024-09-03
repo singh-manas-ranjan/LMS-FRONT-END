@@ -2,7 +2,6 @@
 import {
   Button,
   FormControl,
-  FormLabel,
   Input,
   InputGroup,
   InputLeftElement,
@@ -16,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { Lock, Eye, EyeOff, User } from "lucide-react";
+import Link from "next/link";
 interface FormType {
   username: string;
   password: string;
@@ -29,10 +29,6 @@ const errorMsg = {
 const inputField = {
   bg: "#fff",
   fontSize: { base: "sm" },
-};
-
-const formLabel = {
-  fontSize: { base: "sm", lg: "md" },
 };
 
 type TAuth = {
@@ -124,9 +120,6 @@ const SignInForm = ({ access: { role, successPath }, onClose }: Props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl>
-        <FormLabel htmlFor="username" sx={formLabel}>
-          Username
-        </FormLabel>
         <InputGroup size={"sm"}>
           <InputLeftElement>
             <User size={15} color="grey" />
@@ -138,15 +131,13 @@ const SignInForm = ({ access: { role, successPath }, onClose }: Props) => {
             type="text"
             sx={inputField}
             size={{ base: "sm", lg: "md" }}
-            placeholder="username"
+            placeholder="Username"
+            rounded={"4"}
           />
         </InputGroup>
         <Text sx={errorMsg}>{errors.username?.message}</Text>
       </FormControl>
       <FormControl mt={5}>
-        <FormLabel htmlFor="password" sx={formLabel}>
-          Password
-        </FormLabel>
         <InputGroup size={"sm"}>
           <InputLeftElement>
             <Lock size={15} color="grey" />
@@ -158,7 +149,8 @@ const SignInForm = ({ access: { role, successPath }, onClose }: Props) => {
             type={show ? "text" : "password"}
             sx={inputField}
             size={{ base: "sm", lg: "md" }}
-            placeholder="password"
+            placeholder="Password"
+            rounded={"4"}
           />
           <InputRightElement height={"100%"} width={"fit-content"} pr={1}>
             <Button
@@ -174,31 +166,35 @@ const SignInForm = ({ access: { role, successPath }, onClose }: Props) => {
         </InputGroup>
         <Text sx={errorMsg}>{errors.password?.message}</Text>
       </FormControl>
-      {/* <FormControl mt={5} fontSize={{ base: "sm", lg: "md" }}>
+      <FormControl mt={3} fontSize={{ base: "sm", lg: "md" }}>
         <Text>
-          Not registered ?{" "}
-          <Link href={"/register"} style={{ color: "#0275d8" }}>
-            Register
+          Forgot Password ?
+          <Link
+            href={"/auth/reset"}
+            style={{ color: "#0275d8", marginLeft: "5px" }}
+          >
+            click here.
           </Link>
         </Text>
-      </FormControl> */}
+      </FormControl>
       <FormControl>
-        <Stack direction={"row"} spacing={5}>
+        <Stack direction={"column"} spacing={3}>
           <Button
             type="submit"
             mt={5}
             onSubmit={handleSubmit(onSubmit)}
             colorScheme="blue"
             size={{ base: "sm", lg: "md" }}
+            rounded={"4"}
           >
             Sign in
           </Button>
           <Button
             type="reset"
-            mt={5}
             onSubmit={() => reset}
             colorScheme="teal"
             size={{ base: "sm", lg: "md" }}
+            rounded={"4"}
           >
             Reset
           </Button>

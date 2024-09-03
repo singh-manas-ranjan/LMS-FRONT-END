@@ -6,6 +6,7 @@ import { sendPasswordResetEmailUsingNodeMailer } from "@/lib/mail";
 import { generatePasswordResetToken } from "@/lib/tokens";
 import axios from "axios";
 import { getUserByEmail } from "@/actions/users/action";
+import { TUser } from "@/app/ui/navbar/Navbar";
 
 export type TPasswordResetToken = {
   id?: string;
@@ -19,7 +20,7 @@ export const getPasswordResetTokenByToken = async (
 ): Promise<TPasswordResetToken | null> => {
   try {
     const passwordResetToken = await axios
-      .get(`http://localhost:3131/api/v1/password-reset-tokens/${token}`)
+      .get(`http://localhost:3131/api/v1/password-reset-tokens/token/${token}`)
       .then((res) => res.data.body);
     return passwordResetToken;
   } catch {
@@ -70,17 +71,16 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
 
   const { email } = validatedFields.data;
 
-  const existingUser = await getUserByEmail(email, values.accountType);
+  const existingUser: TUser = await getUserByEmail(email, values.accountType);
 
   if (!existingUser) {
     return { error: "Email not found!" };
   }
 
   const passwordResetToken = await generatePasswordResetToken(email);
-  console.log({ PasswordResetToken: passwordResetToken });
-
   //   Send verification email using nodemailer
   await sendPasswordResetEmailUsingNodeMailer(
+    `${existingUser.firstName} ${existingUser.lastName}`,
     passwordResetToken?.email,
     passwordResetToken?.token,
     values.accountType

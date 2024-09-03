@@ -17,7 +17,7 @@ import {
 import React from "react";
 
 import { LiaSignInAltSolid } from "react-icons/lia";
-import LoginForm from "../signIn/SignInForm";
+import SignInForm from "../signIn/SignInForm";
 
 const SignInModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -58,13 +58,13 @@ const SignInModal = () => {
               </TabList>
               <TabPanels>
                 <TabPanel>
-                  <LoginForm
+                  <SignInForm
                     access={{ role: "students", successPath: "/dashboard" }}
                     onClose={onClose}
                   />
                 </TabPanel>
                 <TabPanel>
-                  <LoginForm
+                  <SignInForm
                     access={{
                       role: "instructors",
                       successPath: "/instructor-dashboard",
@@ -73,7 +73,7 @@ const SignInModal = () => {
                   />
                 </TabPanel>
                 <TabPanel>
-                  <LoginForm
+                  <SignInForm
                     access={{
                       role: "admin",
                       successPath: "/home",

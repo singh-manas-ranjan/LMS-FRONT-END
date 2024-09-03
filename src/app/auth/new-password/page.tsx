@@ -1,6 +1,7 @@
-import { ResetForm } from "@/app/ui/auth/reset-form";
+import { NewPasswordForm } from "@/app/ui/auth/new-password-form";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import Link from "next/link";
+import { Suspense } from "react";
 
 const navStyle = {
   w: "100%",
@@ -8,7 +9,7 @@ const navStyle = {
   justifyContent: "space-between",
   alignItems: "center",
 };
-const ForgotPassword = () => {
+const NewPasswordPage = () => {
   return (
     <Box>
       <Flex as="nav" sx={navStyle} boxShadow={"0 2px 2px -2px gray"}>
@@ -40,10 +41,12 @@ const ForgotPassword = () => {
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <ResetForm />
+        <Suspense>
+          <NewPasswordForm />
+        </Suspense>
       </Box>
     </Box>
   );
 };
 
-export default ForgotPassword;
+export default NewPasswordPage;

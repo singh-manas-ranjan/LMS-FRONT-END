@@ -4,11 +4,12 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 //Sending password reset email using nodemailer
 export const sendPasswordResetEmailUsingNodeMailer = async (
+  name: string,
   email: string,
   token: string,
   accountType: string
 ) => {
-  const resetLink = `${baseUrl}/auth/new-password/${accountType}?token=${token}`;
+  const resetLink = `${baseUrl}/auth/new-password/?acc-type=${accountType}&token=${token}`;
   const { SMTP_EMAIL, SMTP_PASSWORD } = process.env;
 
   const transporter = nodemailer.createTransport({
@@ -90,7 +91,7 @@ export const sendPasswordResetEmailUsingNodeMailer = async (
               <h1 style="color: #333;">Password Reset Request</h1>
             </div>
             <div class="content" style="font-size: 16px; line-height: 1.5; color: #555; margin-bottom: 20px;">
-              <p>Hello,</p>
+              <p>Hello ${name},</p>
               <p>We received a request to reset your password. Click the button below to create a new password:</p>
               <a href="${resetLink}" class="button" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: #ffffff; background-color: #007bff; border-radius: 4px; text-decoration: none;">Reset Password</a>
               <p>If you did not request this, please ignore this email.</p>
