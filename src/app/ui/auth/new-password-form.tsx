@@ -102,7 +102,7 @@ export const NewPasswordForm = () => {
                 rounded={"4"}
               />
             </InputGroup>
-            <FormErrorMessage fontSize={".7rem"}>
+            <FormErrorMessage fontSize={".8rem"}>
               {errors.password?.message}
             </FormErrorMessage>
           </FormControl>
@@ -123,7 +123,7 @@ export const NewPasswordForm = () => {
                 rounded={"4"}
               />
             </InputGroup>
-            <FormErrorMessage fontSize={".7rem"}>
+            <FormErrorMessage fontSize={".8rem"}>
               {errors.confirmPassword?.message}
             </FormErrorMessage>
           </FormControl>

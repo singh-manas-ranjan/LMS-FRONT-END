@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
-import { Lock, Eye, EyeOff, User } from "lucide-react";
+import { Lock, Eye, EyeOff, User, UserIcon } from "lucide-react";
 import Link from "next/link";
 interface FormType {
   username: string;
@@ -120,9 +120,9 @@ const SignInForm = ({ access: { role, successPath }, onClose }: Props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl>
-        <InputGroup size={"sm"}>
+        <InputGroup size={{ base: "sm", lg: "md" }}>
           <InputLeftElement>
-            <User size={15} color="grey" />
+            <UserIcon color="grey" size={15} />
           </InputLeftElement>
           <Input
             {...register("username", {
@@ -138,7 +138,7 @@ const SignInForm = ({ access: { role, successPath }, onClose }: Props) => {
         <Text sx={errorMsg}>{errors.username?.message}</Text>
       </FormControl>
       <FormControl mt={5}>
-        <InputGroup size={"sm"}>
+        <InputGroup size={{ base: "sm", lg: "md" }}>
           <InputLeftElement>
             <Lock size={15} color="grey" />
           </InputLeftElement>
